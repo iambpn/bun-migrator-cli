@@ -9,6 +9,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+// InitCli initializes the cli with the given migrator and os args
+// extendCli can be used to add additional commands to the cli
 func InitCli(migrator *migrate.Migrator, osArgs []string, extendCli ...*cli.Command) {
 	app := &cli.App{
 		Name:      "migrator",
