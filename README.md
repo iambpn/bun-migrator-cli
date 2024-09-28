@@ -8,6 +8,12 @@ You can read more about the Migration Tool in [Bun Migration Docs](https://bun.u
 
 Also, Most of the code used here is taken from [Bun Example Project](https://github.com/uptrace/bun/tree/master/example/migrate)
 
+### Install
+
+```bash
+go get github.com/iambpn/bun-migrator-cli
+```
+
 ## Usage
 
 ```go
