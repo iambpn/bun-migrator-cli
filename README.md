@@ -28,7 +28,7 @@ import (
   "github.com/uptrace/bun/dialect/sqlitedialect"
   "github.com/uptrace/bun/driver/sqliteshim"
   "github.com/uptrace/bun/migrate"
-  migratorCli "github.com/uptrace/bun-migrator-cli"
+  migratorCli "github.com/iambpn/bun-migrator-cli"
 )
 
 // instantiate DB
