@@ -16,6 +16,28 @@ go get github.com/iambpn/bun-migrator-cli
 
 ## Usage
 
+**Create a folder where you want to all you migrations. For e.g: `migrations` and add this file to the folder.**
+
+```go
+//file: main.go
+
+package migrations
+
+import "github.com/uptrace/bun/migrate"
+
+// create new migration instance
+var Migrations = migrate.NewMigrations()
+
+func init() {
+  // register all the migration defined in this folder
+	if err := Migrations.DiscoverCaller(); err != nil {
+		panic(err)
+	}
+}
+```
+
+**Create a `main.go` in `cmd` folder and add the following code.**
+
 ```go
 package main
 
@@ -24,6 +46,7 @@ import (
   "log"
   "os"
 
+  ".../migrations"
   "github.com/uptrace/bun"
   "github.com/uptrace/bun/dialect/sqlitedialect"
   "github.com/uptrace/bun/driver/sqliteshim"
@@ -31,21 +54,29 @@ import (
   migratorCli "github.com/iambpn/bun-migrator-cli"
 )
 
-// instantiate DB
-sqlDb, err := sql.Open(sqliteshim.ShimName, "file::memory:?cache=shared")
+func main(){
+  // instantiate raw DB
+  sqlDb, err := sql.Open(sqliteshim.ShimName, "file::memory:?cache=shared")
 
-if err != nil {
-  log.Fatal(err)
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  // get bun db instance
+  db := bun.NewDB(sqlDb, sqlitedialect.New())
+
+  // instantiate Migrator
+  migrator := migrate.NewMigrator(db, migrations.Migrations)
+
+  // initialize cli
+  migratorCli.InitCli(migrator, os.Args)
 }
+```
 
-// get bun db instance
-db := bun.NewDB(sqlDb, sqlitedialect.New())
+**Run migrator cli**
 
-// instantiate Migrator
-migrator := migrate.NewMigrator(db, Migrations)
-
-// initialize cli
-migratorCli.InitCli(migrator, os.Args)
+```bash
+go run cmd/main.go migrate
 ```
 
 ## Resources:
