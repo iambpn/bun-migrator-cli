@@ -29,7 +29,7 @@ import "github.com/uptrace/bun/migrate"
 var Migrations = migrate.NewMigrations()
 
 func init() {
-  // register all the migration defined in this folder
+  // register all the sql migration defined in this folder
 	if err := Migrations.DiscoverCaller(); err != nil {
 		panic(err)
 	}
