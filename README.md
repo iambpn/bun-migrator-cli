@@ -76,7 +76,9 @@ func main(){
 **Run migrator cli**
 
 ```bash
-go run cmd/main.go migrate
+go run cmd/main.go init # to initialize the migration table in database
+go run cmd/main.go create <migration_name> # to create a new migration file
+go run cmd/main.go migrate # to run all the pending migrations
 ```
 
 ## Resources:
