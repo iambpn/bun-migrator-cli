@@ -16,10 +16,10 @@ go get github.com/iambpn/bun-migrator-cli
 
 ## Usage
 
-**Create a folder where you want to all you migrations. For e.g: `migrations` and add this file to the folder.**
+**Create a folder where you want to add your migration files. For e.g: In `/migrations` folder, add this file.**
 
 ```go
-//file: main.go
+//file: migrations/init.go
 
 package migrations
 
@@ -28,6 +28,7 @@ import "github.com/uptrace/bun/migrate"
 // create new migration instance
 var Migrations = migrate.NewMigrations()
 
+// Run when the module is initialized
 func init() {
   // register all the sql migration defined in this folder
 	if err := Migrations.DiscoverCaller(); err != nil {
@@ -36,9 +37,10 @@ func init() {
 }
 ```
 
-**Create a `main.go` in `cmd` folder and add the following code.**
+**Create a `main.go` in `cmd` folder and add this code to setup migrator cli.**
 
 ```go
+// file: cmd/main.go
 package main
 
 import (
@@ -76,6 +78,7 @@ func main(){
 **Run migrator cli**
 
 ```bash
+go run cmd/main.go help # to see the help message
 go run cmd/main.go init # to initialize the migration table in database
 go run cmd/main.go create <migration_name> # to create a new migration file
 go run cmd/main.go migrate # to run all the pending migrations
