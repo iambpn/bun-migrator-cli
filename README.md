@@ -48,7 +48,7 @@ import (
   "log"
   "os"
 
-  ".../migrations"
+  ".../migrations" // import migrations module
   "github.com/uptrace/bun"
   "github.com/uptrace/bun/dialect/sqlitedialect"
   "github.com/uptrace/bun/driver/sqliteshim"
