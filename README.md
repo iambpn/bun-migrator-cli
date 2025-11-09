@@ -87,4 +87,5 @@ go run cmd/main.go migrate # to run all the pending migrations
 ## Resources:
 
 - [Uptrace/Bun](https://github.com/uptrace/bun)
+- [Uptace/Bun - Migrator Example](https://github.com/uptrace/bun/tree/master/example/migrate)
 - [Urfave/Cli](https://github.com/urfave/cli)
